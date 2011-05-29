@@ -10,7 +10,7 @@ reverse: ${FILE}.c
 
 bind: bind_tcp.s
 	/opt/local/bin/nasm -f macho64 bind_tcp.s -o bind_tcp.o
-	ld -arch x86_64 bind_tcp.o -o bind_shell
+	ld -arch x86_64 -macosx_version_min 10.6 bind_tcp.o -o bind_shell
 
 tester: sc_tester.c
 	${CC} sc_tester.c -o sc_tester
