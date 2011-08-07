@@ -1,4 +1,4 @@
-AC=/opt/local/bin/nasm
+AC=/usr/local/bin/nasm
 AFLAGS= -f macho64
 FILE=helloworld
 
@@ -10,5 +10,5 @@ helloworld: ${FILE}.s
 clean:
 	rm -rf ${FILE}
 	rm -rf *.dSYM/
-	rm a.out
+	rm *.o			
 
